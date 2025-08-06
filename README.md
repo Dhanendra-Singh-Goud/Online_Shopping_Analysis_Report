@@ -1,48 +1,77 @@
-# Online_Shopping_Analysis_Report
-SQL_Dummy_Project_Like_amazon    
+# 🛒 Online Shopping Sales Analysis Project
 
-# Amazon USA Sales Analysis Project
-
-**Difficulty Level:** `Advanced`
+**Schema Name:** `sales`  
+**Difficulty Level:** `Advanced`  
+**Database Used:** PostgreSQL / MySQL
 
 ---
 
 ## 📘 Project Overview
 
-I have worked on analyzing a dataset of over **20,000 sales records** from an Amazon-like e-commerce platform.  
-This project involves extensive querying of customer behavior, product performance, and sales trends using **PostgreSQL**.
+This project focuses on analyzing the complete lifecycle of an e-commerce business through SQL. Using a structured relational database consisting of 9 tables, it simulates an Amazon-like sales environment.
+
+Through querying, transformation, and analysis, we aim to draw valuable business insights related to customer behavior, product sales, order management, shipping delays, payment trends, and inventory performance.
 
 ---
 
-## 🔍 Focus Areas
+## 🛠 Database Setup & Design
 
-- Revenue analysis
-- Customer segmentation
-- Inventory management
-- Handling missing values
-- Data cleaning
-- Writing complex SQL queries
+**Schema:** `sales`  
+**Total Tables:** 9  
+- `category`  
+- `customers`  
+- `product`  
+- `orders`  
+- `order_item`  
+- `payment`  
+- `shipping`  
+- `inventory`  
+- `returns` *(optional)*
 
----
-
-## 📊 Technologies Used
-
-- PostgreSQL
-- DBMS
-- SQL Queries
-- Data Analytics
-- ERD Diagrams
+The schema design is normalized to reduce redundancy and ensures data integrity through proper foreign key relationships.
 
 ---
 
-## 🗂 Dataset Details
+## 🎯 Project Objectives
 
-- 20,000+ sales records
-- Product & inventory data
-- Order & shipping data
+- Build a realistic sales database with 20K+ records
+- Perform queries from beginner to advanced level
+- Clean, transform, and enrich raw data using SQL
+- Analyze and visualize key business metrics
+- Simulate real-world business scenarios using SQL
 
 ---
 
-## 🖼 ERD Diagram
+## 🧪 Tasks Performed
 
-> Add your ERD image using:
+### ✅ Data Cleaning
+- Removed duplicate records
+- Standardized inconsistent values
+- Converted date formats and null fields
+
+### ✅ Handling Nulls
+- Replaced nulls using COALESCE, CASE statements
+- Identified missing relationships via LEFT JOINs
+
+### ✅ Identifying Business Problems
+- What products are underperforming?
+- Which customers are returning products most often?
+- Which regions are causing delays in shipping?
+
+### ✅ Solving Business Problems
+- Using SQL window functions to rank top customers
+- Inventory restock alerts via conditional logic
+- Delivery time vs. return rate correlation analysis
+
+---
+
+## 🧩 Sample Queries Used
+
+```sql
+-- Top 5 products by revenue
+SELECT p.product_name, SUM(oi.quantity * oi.unit_price) AS total_revenue
+FROM order_item oi
+JOIN product p ON oi.product_id = p.product_id
+GROUP BY p.product_name
+ORDER BY total_revenue DESC
+LIMIT 5;
